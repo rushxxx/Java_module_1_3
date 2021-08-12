@@ -1,6 +1,6 @@
-import model.Developer;
-import model.Skill;
-import model.Team;
+import com.rush_xxx.model.Developer;
+import com.rush_xxx.model.Skill;
+import com.rush_xxx.model.Team;
 
 import java.util.ArrayList;
 import java.util.List;

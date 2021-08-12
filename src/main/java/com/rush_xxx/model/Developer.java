@@ -1,4 +1,4 @@
-package model;
+package com.rush_xxx.model;
 
 import java.util.List;
 import java.util.Objects;
