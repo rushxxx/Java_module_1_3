@@ -4,25 +4,23 @@ import java.util.Scanner;
 
 public class Runner {
 
-    private Scanner sc = new Scanner(System.in);
-
-    // не нашел нормального метода очистки консоли
-    public static void clearConsole(){
-        for(int i=0; i<10; i++) System.out.println("\n\n\n\n\n\n\n\n\n\n");
-    }
+    private final Scanner sc = new Scanner(System.in);
 
     public void run () {
-        clearConsole();
-        Menu.printMainMenu();
-        String response = sc.next();
-        clearConsole();
+        while (true) {
+            BaseView.clearConsole();
+            MainMenu.show();
+            String response = sc.next();
 
-        // правильно ли здесь использовать if?
-        if (response.equals("1")) {
-            System.out.println("Your chois is: " + response);
-        };
-        if (response.equals("2")) {
-            System.out.println("Your chois is: " + response);
-        };
+            TeamImpl teamImpl = new TeamImpl();
+            SkillImpl skillImpl = new SkillImpl();
+
+            // правильно ли здесь использовать if?
+            if (response.equals("1")) teamImpl.show("team");
+            if (response.equals("2")) System.out.println("Your choice is: " + response);
+            if (response.equals("3")) skillImpl.show("skill");
+            if (response.equals("4")) break;
+        }
+        sc.close();
     }
 }
