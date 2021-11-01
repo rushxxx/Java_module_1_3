@@ -3,19 +3,19 @@ package com.rush_xxx.model;
 import java.util.Objects;
 
 public class Skill {
-    private int id;
+    private Long id;
     private String name;
 
-    public Skill(int id, String name) {
+    public Skill(Long id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

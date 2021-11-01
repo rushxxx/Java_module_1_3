@@ -12,8 +12,8 @@ public class Runner {
             MainMenu.show();
             String response = sc.next();
 
-            TeamImpl teamImpl = new TeamImpl();
-            SkillImpl skillImpl = new SkillImpl();
+            ViewTeamImpl teamImpl = new ViewTeamImpl();
+            ViewSkillImpl skillImpl = new ViewSkillImpl();
 
             // правильно ли здесь использовать if?
             if (response.equals("1")) teamImpl.show("team");

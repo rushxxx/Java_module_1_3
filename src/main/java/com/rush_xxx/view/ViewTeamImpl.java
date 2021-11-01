@@ -1,6 +1,6 @@
 package com.rush_xxx.view;
 
-public class TeamImpl extends BaseView{
+public class ViewTeamImpl extends BaseView{
 
     @Override
     void create() {
