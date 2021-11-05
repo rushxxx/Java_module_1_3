@@ -16,12 +16,7 @@ public class io {
                 new InputStreamReader(
                         new FileInputStream(GetPath(filename)), StandardCharsets.UTF_8))) {
             data = reader.readLine();
-//            String line;
-//            while ((line = reader.readLine()) != null) {
-//                data.add(line);
-//            }
         } catch (IOException e) {
-            // log error
             System.out.println(e.getMessage());
         }
 
@@ -29,9 +24,8 @@ public class io {
     }
     protected static void writeData(String fileName, String data){
 
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(GetPath(fileName)))) {
-            bw.write(data);
-            bw.newLine();
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(GetPath(fileName)))) {
+            writer.write(data);
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }

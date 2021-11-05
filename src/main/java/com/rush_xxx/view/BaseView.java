@@ -12,7 +12,7 @@ public abstract class BaseView {
     private final Scanner sc = new Scanner(System.in);
 
     public static void clearConsole(){
-        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n");
+        System.out.println("\n\n\n\n\n\n\n");
     }
 
     void show (String menuName) {
