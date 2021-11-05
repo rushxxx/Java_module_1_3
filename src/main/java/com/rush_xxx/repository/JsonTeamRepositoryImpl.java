@@ -2,6 +2,8 @@ package com.rush_xxx.repository;
 
 import com.rush_xxx.model.Team;
 
+import java.util.Collection;
+
 public class JsonTeamRepositoryImpl implements TeamRepository{
     @Override
     public Team getById(Long id) {
@@ -11,6 +13,11 @@ public class JsonTeamRepositoryImpl implements TeamRepository{
     @Override
     public void remove(Long id) {
 
+    }
+
+    @Override
+    public Collection<Team> viewAll() {
+        return null;
     }
 
     @Override

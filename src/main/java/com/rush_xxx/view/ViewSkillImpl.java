@@ -3,6 +3,7 @@ package com.rush_xxx.view;
 import com.rush_xxx.model.Skill;
 import com.rush_xxx.repository.JsonSkillRepositoryImpl;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class ViewSkillImpl extends BaseView{
@@ -37,5 +38,18 @@ public class ViewSkillImpl extends BaseView{
         Long id = Long.valueOf(sc.nextInt());
         JsonSkillRepositoryImpl jsonSkillRepository = new JsonSkillRepositoryImpl();
         jsonSkillRepository.remove(id);
+    }
+
+    @Override
+    void readAll() {
+        JsonSkillRepositoryImpl jsonSkillRepository = new JsonSkillRepositoryImpl();
+        List<Skill> skills = jsonSkillRepository.viewAll();
+        
+        System.out.println("----------------------------------------");
+        // выводим все элементы кроме первого
+        for (int i = 1; i < skills.size(); i++){
+            System.out.println(skills.get(i).getId() + " - " + skills.get(i).getName());
+        }
+        System.out.println("----------------------------------------");
     }
 }

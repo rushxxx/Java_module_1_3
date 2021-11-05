@@ -7,6 +7,7 @@ public abstract class BaseView {
     abstract void read();
     abstract void update();
     abstract void delete();
+    abstract void readAll();
 
     private final Scanner sc = new Scanner(System.in);
 
@@ -36,7 +37,11 @@ public abstract class BaseView {
                 delete();
             }
 
-            if (response.equals("5")) break;
+            if (response.equals("5")) {
+                readAll();
+            }
+
+            if (response.equals("6")) break;
         }
     }
 }

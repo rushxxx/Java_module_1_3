@@ -21,4 +21,9 @@ public class ViewTeamImpl extends BaseView{
     void delete() {
 
     }
+
+    @Override
+    void readAll() {
+
+    }
 }
