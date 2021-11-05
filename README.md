@@ -1,14 +1,14 @@
 # Java_module_1_3
 
 Необходимо реализовать консольное CRUD приложение, которое имеет следующие сущности:
-
-Team(id, name, List<Developer> developers)
-Developer(id, firstName, lastName, List<Skill> skills)
-Skill(id, name)
-TeamStatus (enum ACTIVE, DELETED)
+- Team(id, name, List<Developer> developers)
+- Developer(id, firstName, lastName, List<Skill> skills)
+- Skill(id, name)
+- TeamStatus (enum ACTIVE, DELETED)
 
 В качестве хранилища данных необходимо использовать текстовые файлы:
 teams.json, developers.json, skills.json
+    
 Пользователь в консоли должен иметь возможность создания, получения, редактирования и удаления данных.
 Слои:
 model - POJO классы
