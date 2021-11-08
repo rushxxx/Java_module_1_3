@@ -1,9 +1,11 @@
 package com.rush_xxx.repository;
 
-import java.util.Collection;
+import java.util.List;
 
 public interface GenericRepository <T, ID>{
     T getById(ID id);
-    void remove(ID id);
-    Collection<T> viewAll();
+    void deleteById(ID id);
+    List getAll();
+    T save(T t);
+    T update (T t);
 }

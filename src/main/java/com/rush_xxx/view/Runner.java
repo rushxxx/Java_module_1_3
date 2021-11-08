@@ -1,5 +1,8 @@
 package com.rush_xxx.view;
 
+import com.rush_xxx.controller.SkillControllerImpl;
+import com.rush_xxx.repository.JsonSkillRepositoryImpl;
+
 import java.util.Scanner;
 
 public class Runner {
@@ -12,17 +15,19 @@ public class Runner {
             MainMenu.show();
             String response = sc.next();
 
-            ViewTeamImpl teamImpl = new ViewTeamImpl();
-            ViewSkillImpl skillImpl = new ViewSkillImpl();
+            JsonSkillRepositoryImpl skillRepository = new JsonSkillRepositoryImpl();
+            SkillControllerImpl skillController = new SkillControllerImpl(skillRepository);
+            ViewSkillImpl viewSkillImpl = new ViewSkillImpl(skillController);
+
 
             // правильно ли здесь использовать if?
-            if (response.equals("1")) teamImpl.show("team");
+            if (response.equals("1")) System.out.println("Your choice is: " + response);
             if (response.equals("2")) System.out.println("Your choice is: " + response);
-            if (response.equals("3")) skillImpl.show("skill");
+            if (response.equals("3")) viewSkillImpl.show("skill");
             if (response.equals("4")){
                 break;
             }else{
-                System.out.println("Incorrect menu item");
+                System.out.println("Please enter correct menu item");
             };
         }
         sc.close();
