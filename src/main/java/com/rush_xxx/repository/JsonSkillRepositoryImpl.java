@@ -14,7 +14,6 @@ public class JsonSkillRepositoryImpl implements SkillRepository{
 
     @Override
     public Skill getById(Long id) {
-        // может лучше сделать метод который будет возвращать просто name?
         String data = io.readData(FILE_NAME);
         Gson gson = new Gson();
         Type listType = new TypeToken<Collection<Skill>>(){}.getType();
@@ -26,12 +25,11 @@ public class JsonSkillRepositoryImpl implements SkillRepository{
                 skill = skills.get(i);
             }
         }
-        
         return skill;
     }
 
     @Override
-    public void remove(Long id) {
+    public void deleteById(Long id) {
         String data = io.readData(FILE_NAME);
         Gson gson = new Gson();
         Type listType = new TypeToken<Collection<Skill>>(){}.getType();
@@ -47,7 +45,7 @@ public class JsonSkillRepositoryImpl implements SkillRepository{
     }
 
     @Override
-    public List<Skill> viewAll() {
+    public List<Skill> getAll() {
         String data = io.readData(FILE_NAME);
         Gson gson = new Gson();
         Type listType = new TypeToken<Collection<Skill>>(){}.getType();
@@ -56,34 +54,34 @@ public class JsonSkillRepositoryImpl implements SkillRepository{
         return skills;
     }
 
+
     @Override
-    public void create(String name) {
+    public Skill save(Skill skill) {
         String data = io.readData(FILE_NAME);
         Gson gson = new Gson();
         Type listType = new TypeToken<Collection<Skill>>(){}.getType();
         List<Skill> skills = gson.fromJson(data, listType);
 
-        Long newId = skills.get(0).getId() + 1;// id первого скилла является счетчиком уникальных id
-        skills.get(0).setId(newId);
-        Skill skill = new Skill(newId, name);
+        skills.get(0).setId(skill.getId());
         skills.add(skill);
-
         io.writeData(FILE_NAME, gson.toJson(skills));
+        return null;
     }
 
     @Override
-    public void update(Long id, String name) {
+    public Skill update(Skill skill) {
         String data = io.readData(FILE_NAME);
         Gson gson = new Gson();
         Type listType = new TypeToken<Collection<Skill>>(){}.getType();
         List<Skill> skills = gson.fromJson(data, listType);
 
         for (int i = 1; i < skills.size(); i++){
-            if (skills.get(i).getId().equals(id)){
-                skills.get(i).setName(name);
+            if (skills.get(i).getId().equals(skill.getId())){
+                skills.get(i).setName(skill.getName());
             }
         }
-
         io.writeData(FILE_NAME, gson.toJson(skills));
+        return skill;
     }
+
 }

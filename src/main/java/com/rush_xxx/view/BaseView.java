@@ -12,14 +12,31 @@ public abstract class BaseView {
     private final Scanner sc = new Scanner(System.in);
 
     public static void clearConsole(){
-        System.out.println("\n\n\n\n\n\n\n");
+        // не нашел нормального метода очистки консоли
+        System.out.println("************************************************************");
+        System.out.println("               ------ Clear console ------                  ");
+        System.out.println("************************************************************");
+        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n");
     }
+
+    public void pressAnyKeyToContinue()
+    {
+        System.out.println("Press Enter key to continue...");
+        try
+        {
+            System.in.read();
+        }
+        catch(Exception e)
+        {}
+    }
+
 
     void show (String menuName) {
         while (true) {
             BaseView.clearConsole();
             CrudMenu.show(menuName);
             String response = sc.next();
+            BaseView.clearConsole();
 
             if (response.equals("1")) {
                 create();
@@ -42,6 +59,7 @@ public abstract class BaseView {
             }
 
             if (response.equals("6")) break;
+
         }
     }
 }
