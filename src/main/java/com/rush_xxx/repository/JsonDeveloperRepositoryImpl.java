@@ -1,15 +1,12 @@
 package com.rush_xxx.repository;
 
-import com.rush_xxx.model.Team;
+import com.rush_xxx.model.Developer;
 
 import java.util.List;
 
-public class JsonTeamRepositoryImpl implements TeamRepository {
-
-    private final static String FILE_NAME = "teams.json";
-
+public class JsonDeveloperRepositoryImpl implements DeveloperRepository {
     @Override
-    public Team getById(Long aLong) {
+    public Developer getById(Long aLong) {
         return null;
     }
 
@@ -24,12 +21,12 @@ public class JsonTeamRepositoryImpl implements TeamRepository {
     }
 
     @Override
-    public Team save(Team team) {
+    public Developer save(Developer developer) {
         return null;
     }
 
     @Override
-    public Team update(Team team) {
+    public Developer update(Developer developer) {
         return null;
     }
 }

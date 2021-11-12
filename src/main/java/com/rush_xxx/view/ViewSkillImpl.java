@@ -4,6 +4,7 @@ import com.rush_xxx.controller.SkillControllerImpl;
 import com.rush_xxx.model.Skill;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class ViewSkillImpl extends BaseView{
@@ -23,7 +24,7 @@ public class ViewSkillImpl extends BaseView{
         skillController.create(newSkillName);
 
         System.out.println("Created new skill with name " + newSkillName);
-        pressAnyKeyToContinue();
+        pressEnterKeyToContinue();
     }
 
     @Override
@@ -34,10 +35,10 @@ public class ViewSkillImpl extends BaseView{
             String skillName = skillController.read(id);
 
             System.out.println("Skill id = " + id + " Skill name = " + skillName);
-            pressAnyKeyToContinue();
-        }catch (Exception e){
+            pressEnterKeyToContinue();
+        }catch (NoSuchElementException e){
             System.out.println("There is no " + id + " id");
-            pressAnyKeyToContinue();
+            pressEnterKeyToContinue();
         }
     }
 
@@ -54,10 +55,10 @@ public class ViewSkillImpl extends BaseView{
             skillController.update(id, newSkillName);
 
             System.out.println("Skill with name - \"" + oldSkillName + "\" is updated to name - \"" + newSkillName + "\"");
-            pressAnyKeyToContinue();
-        }catch (NullPointerException e){
+            pressEnterKeyToContinue();
+        }catch (Exception e){
             System.out.println("there is no skill with " + id + " id");
-            pressAnyKeyToContinue();
+            pressEnterKeyToContinue();
         }
     }
 
@@ -69,10 +70,10 @@ public class ViewSkillImpl extends BaseView{
             skillController.delete(id);
 
             System.out.println("Skill with " + id + " id is deleted");
-            pressAnyKeyToContinue();
+            pressEnterKeyToContinue();
         }catch (Exception e){
             System.out.println("There is no " + id + " id");
-            pressAnyKeyToContinue();
+            pressEnterKeyToContinue();
         }
     }
 
@@ -83,11 +84,11 @@ public class ViewSkillImpl extends BaseView{
         System.out.println("___________________________________");
         System.out.println("        *** Skills list ***        ");
 
-        for (int i = 1; i < skills.size(); i++){
-            System.out.println("| " + skills.get(i).getId() + "  -  " + skills.get(i).getName());
+        for (Skill skill : skills) {
+            System.out.println("| " + skill.getId() + "  -  " + skill.getName());
         }
         System.out.println("-----------------------------------");
-        pressAnyKeyToContinue();
+        pressEnterKeyToContinue();
     }
 
 }

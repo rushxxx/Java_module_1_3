@@ -19,7 +19,7 @@ public abstract class BaseView {
         System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n");
     }
 
-    public void pressAnyKeyToContinue()
+    public void pressEnterKeyToContinue()
     {
         System.out.println("Press Enter key to continue...");
         try

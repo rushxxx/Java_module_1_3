@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Objects;
 
 public class Team {
-    private int id;
-    private String name;
+    private final int id;
+    private final String name;
     List<Developer> developers;
 
     public Team(int id, String name, List<Developer> developers) {
@@ -17,11 +17,9 @@ public class Team {
     public int getId() {
         return id;
     }
-
     public String getName() {
         return name;
     }
-
     public List<Developer> getDevelopers() {
         return developers;
     }
