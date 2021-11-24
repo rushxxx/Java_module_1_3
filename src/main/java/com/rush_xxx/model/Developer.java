@@ -4,12 +4,12 @@ import java.util.List;
 import java.util.Objects;
 
 public class Developer {
-    private int id;
+    private Long id;
     private String firstName;
     private String lastName;
     List<Skill> skills;
 
-    public Developer(int id, String firstName, String lastName, List<Skill> skills) {
+    public Developer(Long id, String firstName, String lastName, List<Skill> skills) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -29,11 +29,11 @@ public class Developer {
         return Objects.hash(id, firstName, lastName, skills);
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

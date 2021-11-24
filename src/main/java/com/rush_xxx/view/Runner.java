@@ -1,6 +1,8 @@
 package com.rush_xxx.view;
 
+import com.rush_xxx.controller.DeveloperControllerImpl;
 import com.rush_xxx.controller.SkillControllerImpl;
+import com.rush_xxx.repository.JsonDeveloperRepositoryImpl;
 import com.rush_xxx.repository.JsonSkillRepositoryImpl;
 
 import java.util.Scanner;
@@ -19,11 +21,14 @@ public class Runner {
             SkillControllerImpl skillController = new SkillControllerImpl(skillRepository);
             ViewSkillImpl viewSkillImpl = new ViewSkillImpl(skillController);
 
+            JsonDeveloperRepositoryImpl developerRepository = new JsonDeveloperRepositoryImpl();
+            DeveloperControllerImpl developerController = new DeveloperControllerImpl(developerRepository);
+            ViewDeveloperImpl viewDeveloper = new ViewDeveloperImpl(developerController, skillController, viewSkillImpl);
 
-            // правильно ли здесь использовать if?
+
             if (response.equals("1")) System.out.println("Your choice is: " + response);
-            if (response.equals("2")) System.out.println("Your choice is: " + response);
-            if (response.equals("3")) viewSkillImpl.show("skill");
+            if (response.equals("2")) viewDeveloper.showMenu("developer");
+            if (response.equals("3")) viewSkillImpl.showMenu("skill");
             if (response.equals("4")){
                 break;
             }else{

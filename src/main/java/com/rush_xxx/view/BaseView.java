@@ -13,25 +13,19 @@ public abstract class BaseView {
 
     public static void clearConsole(){
         // не нашел нормального метода очистки консоли
-        System.out.println("************************************************************");
-        System.out.println("               ------ Clear console ------                  ");
-        System.out.println("************************************************************");
-        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n");
+        System.out.println("\n\n\n\n\n\n\n\n\n\n");
     }
 
-    public void pressEnterKeyToContinue()
-    {
+    public void pressEnterKeyToContinue(){
         System.out.println("Press Enter key to continue...");
-        try
-        {
+        try {
             System.in.read();
         }
         catch(Exception e)
         {}
     }
 
-
-    void show (String menuName) {
+    void showMenu(String menuName) {
         while (true) {
             BaseView.clearConsole();
             CrudMenu.show(menuName);
@@ -59,6 +53,8 @@ public abstract class BaseView {
             }
 
             if (response.equals("6")) break;
+
+            pressEnterKeyToContinue();
 
         }
     }

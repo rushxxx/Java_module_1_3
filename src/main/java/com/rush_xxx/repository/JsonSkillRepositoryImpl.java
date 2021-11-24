@@ -12,62 +12,34 @@ import java.util.stream.Collectors;
 public class JsonSkillRepositoryImpl implements SkillRepository{
 
     private final static String FILE_NAME = "skills.json";
-
-    @Override
-    public Skill getById(Long id) {
-        String data = io.readData(FILE_NAME);
-        Gson gson = new Gson();
-        Type listType = new TypeToken<Collection<Skill>>(){}.getType();
-        List<Skill> skills = gson.fromJson(data, listType);
-
-        return skills.stream().filter(s -> s.getId().equals(id)).findFirst().get();
-    }
-
-    @Override
-    public void deleteById(Long id) {
-        String data = io.readData(FILE_NAME);
-        Gson gson = new Gson();
-        Type listType = new TypeToken<Collection<Skill>>(){}.getType();
-        List<Skill> skills = gson.fromJson(data, listType);
-
-        List<Skill> newSkills = skills.stream()
-                .skip(1)
-                .filter(s -> !s.getId().equals(id))
-                .collect(Collectors.toList());
-
-        io.writeData(FILE_NAME, gson.toJson(newSkills));
-    }
-
-    @Override
-    public List<Skill> getAll() {
-        String data = io.readData(FILE_NAME);
-        Gson gson = new Gson();
-        Type listType = new TypeToken<Collection<Skill>>(){}.getType();
-        List<Skill> skills = gson.fromJson(data, listType);
-
-        return skills;
-    }
-
+    private final Gson gson = new Gson();
+    private final Type listType = new TypeToken<Collection<Skill>>(){}.getType();
 
     @Override
     public Skill save(Skill skill) {
-        String data = io.readData(FILE_NAME);
-        Gson gson = new Gson();
-        Type listType = new TypeToken<Collection<Skill>>(){}.getType();
-        List<Skill> skills = gson.fromJson(data, listType);
+        List<Skill> skills = gson.fromJson(io.readData(FILE_NAME), listType);
 
-        skills.get(0).setId(skill.getId() + 1);
+        Long nextId = skills.get(0).getId();
+        skills.get(0).setId(nextId  + 1);
+        skill.setId(nextId);
         skills.add(skill);
         io.writeData(FILE_NAME, gson.toJson(skills));
         return null;
     }
 
     @Override
+    public Skill getById(Long id) {
+        List<Skill> skills = gson.fromJson(io.readData(FILE_NAME), listType);
+
+        return skills.stream()
+                .filter(s -> s.getId().equals(id))
+                .findFirst().get();
+    }
+
+    @Override
     public Skill update(Skill skill) {
-        String data = io.readData(FILE_NAME);
-        Gson gson = new Gson();
-        Type listType = new TypeToken<Collection<Skill>>(){}.getType();
-        List<Skill> skills = gson.fromJson(data, listType);
+        List<Skill> skills = gson.fromJson(io.readData(FILE_NAME), listType);
+
         try {
             skills = skills.stream()
                     .map(s -> s.getId().equals(skill.getId()) ? skill : s)
@@ -77,8 +49,24 @@ public class JsonSkillRepositoryImpl implements SkillRepository{
         }catch (Exception e){
             return null;
         }
+    }
 
+    @Override
+    public void deleteById(Long id) {
+        List<Skill> skills = gson.fromJson(io.readData(FILE_NAME), listType);
 
+        if (id != 0 && id != skills.get(0).getId()) {
+            List<Skill> newSkills = skills.stream()
+                    .filter(s -> !s.getId().equals(id))
+                    .collect(Collectors.toList());
+
+            io.writeData(FILE_NAME, gson.toJson(newSkills));
+        }
+    }
+
+    @Override
+    public List<Skill> getAll() {
+        return gson.fromJson(io.readData(FILE_NAME), listType);
     }
 
 }

@@ -20,11 +20,7 @@ public class ViewSkillImpl extends BaseView{
     @Override
     void create() {
         System.out.println("Input skill name: ");
-        String newSkillName = sc.next();
-        skillController.create(newSkillName);
-
-        System.out.println("Created new skill with name " + newSkillName);
-        pressEnterKeyToContinue();
+        skillController.create(new Skill(0L, sc.next()));
     }
 
     @Override
@@ -32,13 +28,11 @@ public class ViewSkillImpl extends BaseView{
         System.out.println("Input skill id: ");
         Long id = (long) sc.nextInt();
         try{
-            String skillName = skillController.read(id);
+            String skillName = skillController.read(id).getName();
 
             System.out.println("Skill id = " + id + " Skill name = " + skillName);
-            pressEnterKeyToContinue();
         }catch (NoSuchElementException e){
             System.out.println("There is no " + id + " id");
-            pressEnterKeyToContinue();
         }
     }
 
@@ -48,17 +42,13 @@ public class ViewSkillImpl extends BaseView{
         Long id = (long) sc.nextInt();
 
         try{
-            String oldSkillName = skillController.read(id);
+            String oldSkillName = skillController.read(id).getName();
             System.out.println("current skill name is: " + oldSkillName);
             System.out.print("input new skill name: ");
             String newSkillName = sc.next();
-            skillController.update(id, newSkillName);
-
-            System.out.println("Skill with name - \"" + oldSkillName + "\" is updated to name - \"" + newSkillName + "\"");
-            pressEnterKeyToContinue();
+            skillController.update(new Skill(id, newSkillName));
         }catch (Exception e){
             System.out.println("there is no skill with " + id + " id");
-            pressEnterKeyToContinue();
         }
     }
 
@@ -68,12 +58,8 @@ public class ViewSkillImpl extends BaseView{
         Long id = (long) sc.nextInt();
         try{
             skillController.delete(id);
-
-            System.out.println("Skill with " + id + " id is deleted");
-            pressEnterKeyToContinue();
         }catch (Exception e){
             System.out.println("There is no " + id + " id");
-            pressEnterKeyToContinue();
         }
     }
 
@@ -88,7 +74,6 @@ public class ViewSkillImpl extends BaseView{
             System.out.println("| " + skill.getId() + "  -  " + skill.getName());
         }
         System.out.println("-----------------------------------");
-        pressEnterKeyToContinue();
     }
 
 }

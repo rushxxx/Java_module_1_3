@@ -1,33 +1,35 @@
 package com.rush_xxx.controller;
 
 import com.rush_xxx.model.Developer;
+import com.rush_xxx.repository.JsonDeveloperRepositoryImpl;
 
 import java.util.List;
 
-public class DeveloperControllerImpl implements DeveloperController {
+public class DeveloperControllerImpl {
 
-    @Override
-    public void create(Developer developer) {
+    JsonDeveloperRepositoryImpl jsonDeveloperRepository;
 
+    public DeveloperControllerImpl (JsonDeveloperRepositoryImpl jsonDeveloperRepository){
+        this.jsonDeveloperRepository = jsonDeveloperRepository;
     }
 
-    @Override
-    public Developer read(Long aLong) {
-        return null;
+    public void create(Developer developer){
+        jsonDeveloperRepository.save(developer);
     }
 
-    @Override
-    public void update(Long aLong, Developer developer) {
-
+    public Developer read(Long id){
+        return jsonDeveloperRepository.getById(id);
     }
 
-    @Override
-    public void delete(Long aLong) {
-
+    public void update(Developer developer){
+        jsonDeveloperRepository.update(developer);
     }
 
-    @Override
-    public List readAll() {
-        return null;
+    public void delete(Long id) {
+        jsonDeveloperRepository.deleteById(id);
+    }
+
+    public List<Developer> readAll(){
+        return jsonDeveloperRepository.getAll();
     }
 }
