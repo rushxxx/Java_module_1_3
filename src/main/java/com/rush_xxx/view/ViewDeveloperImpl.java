@@ -1,7 +1,7 @@
 package com.rush_xxx.view;
 
-import com.rush_xxx.controller.DeveloperControllerImpl;
-import com.rush_xxx.controller.SkillControllerImpl;
+import com.rush_xxx.controller.DeveloperController;
+import com.rush_xxx.controller.SkillController;
 import com.rush_xxx.model.Developer;
 import com.rush_xxx.model.Skill;
 
@@ -12,11 +12,11 @@ import java.util.stream.Collectors;
 
 public class ViewDeveloperImpl extends BaseView{
 
-    private final DeveloperControllerImpl developerController;
-    private final SkillControllerImpl skillController;
+    private final DeveloperController developerController;
+    private final SkillController skillController;
     private final ViewSkillImpl viewSkill;
 
-    ViewDeveloperImpl(DeveloperControllerImpl developerController, SkillControllerImpl skillController, ViewSkillImpl viewSkill){
+    public ViewDeveloperImpl(DeveloperController developerController, SkillController skillController, ViewSkillImpl viewSkill){
         this.developerController = developerController;
         this.skillController = skillController;
         this.viewSkill = viewSkill;
@@ -93,7 +93,7 @@ public class ViewDeveloperImpl extends BaseView{
 
     @Override
     void delete() {
-        viewSkill.readAll();
+        readAll();
         System.out.println("Input developer id to delete: ");
         Long id = sc.nextLong();
         try{

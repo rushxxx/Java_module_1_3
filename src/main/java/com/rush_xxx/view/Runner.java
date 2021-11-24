@@ -1,9 +1,11 @@
 package com.rush_xxx.view;
 
-import com.rush_xxx.controller.DeveloperControllerImpl;
-import com.rush_xxx.controller.SkillControllerImpl;
+import com.rush_xxx.controller.DeveloperController;
+import com.rush_xxx.controller.SkillController;
+import com.rush_xxx.controller.TeamController;
 import com.rush_xxx.repository.JsonDeveloperRepositoryImpl;
 import com.rush_xxx.repository.JsonSkillRepositoryImpl;
+import com.rush_xxx.repository.JsonTeamRepositoryImpl;
 
 import java.util.Scanner;
 
@@ -18,15 +20,19 @@ public class Runner {
             String response = sc.next();
 
             JsonSkillRepositoryImpl skillRepository = new JsonSkillRepositoryImpl();
-            SkillControllerImpl skillController = new SkillControllerImpl(skillRepository);
+            SkillController skillController = new SkillController(skillRepository);
             ViewSkillImpl viewSkillImpl = new ViewSkillImpl(skillController);
 
             JsonDeveloperRepositoryImpl developerRepository = new JsonDeveloperRepositoryImpl();
-            DeveloperControllerImpl developerController = new DeveloperControllerImpl(developerRepository);
+            DeveloperController developerController = new DeveloperController(developerRepository);
             ViewDeveloperImpl viewDeveloper = new ViewDeveloperImpl(developerController, skillController, viewSkillImpl);
 
+            JsonTeamRepositoryImpl teamRepository = new JsonTeamRepositoryImpl();
+            TeamController teamController = new TeamController(teamRepository);
+            ViewTeamImpl viewTeam = new ViewTeamImpl(teamController, developerController, viewDeveloper);
 
-            if (response.equals("1")) System.out.println("Your choice is: " + response);
+
+            if (response.equals("1")) viewTeam.showMenu("team");
             if (response.equals("2")) viewDeveloper.showMenu("developer");
             if (response.equals("3")) viewSkillImpl.showMenu("skill");
             if (response.equals("4")){

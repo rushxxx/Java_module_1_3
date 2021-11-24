@@ -5,11 +5,11 @@ import com.rush_xxx.repository.JsonDeveloperRepositoryImpl;
 
 import java.util.List;
 
-public class DeveloperControllerImpl {
+public class DeveloperController {
 
     JsonDeveloperRepositoryImpl jsonDeveloperRepository;
 
-    public DeveloperControllerImpl (JsonDeveloperRepositoryImpl jsonDeveloperRepository){
+    public DeveloperController(JsonDeveloperRepositoryImpl jsonDeveloperRepository){
         this.jsonDeveloperRepository = jsonDeveloperRepository;
     }
 

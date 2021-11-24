@@ -6,11 +6,11 @@ import com.rush_xxx.repository.JsonSkillRepositoryImpl;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class SkillControllerImpl {
+public class SkillController {
 
     private final JsonSkillRepositoryImpl jsonSkillRepository;
 
-    public SkillControllerImpl(JsonSkillRepositoryImpl jsonSkillRepository){
+    public SkillController(JsonSkillRepositoryImpl jsonSkillRepository){
         this.jsonSkillRepository = jsonSkillRepository;
     }
 

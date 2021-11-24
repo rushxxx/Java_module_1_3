@@ -1,6 +1,6 @@
 package com.rush_xxx.view;
 
-import com.rush_xxx.controller.SkillControllerImpl;
+import com.rush_xxx.controller.SkillController;
 import com.rush_xxx.model.Skill;
 
 import java.util.List;
@@ -9,9 +9,9 @@ import java.util.Scanner;
 
 public class ViewSkillImpl extends BaseView{
 
-    private final SkillControllerImpl skillController;
+    private final SkillController skillController;
 
-    ViewSkillImpl (SkillControllerImpl skillController){
+    ViewSkillImpl (SkillController skillController){
         this.skillController = skillController;
     }
 

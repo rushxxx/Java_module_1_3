@@ -16,6 +16,18 @@ public class JsonDeveloperRepositoryImpl implements DeveloperRepository {
     private final Type listType = new TypeToken<Collection<Developer>>(){}.getType();
 
     @Override
+    public Developer save(Developer developer){
+        List<Developer> developers = gson.fromJson(io.readData(FILE_NAME), listType);
+
+        Long nextId = developers.get(0).getId();
+        developer.setId(nextId);
+        developers.get(0).setId(nextId + 1);
+        developers.add(developer);
+        io.writeData(FILE_NAME, gson.toJson(developers));
+        return null;
+    }
+
+    @Override
     public Developer getById(Long id){
         List<Developer> developers = gson.fromJson(io.readData(FILE_NAME), listType);
 
@@ -23,6 +35,22 @@ public class JsonDeveloperRepositoryImpl implements DeveloperRepository {
                 .skip(1)
                 .filter(s -> s.getId().equals(id))
                 .findFirst().get();
+    }
+
+    @Override
+    public Developer update(Developer developer){
+        List<Developer> developers = gson.fromJson(io.readData(FILE_NAME), listType);
+
+        try{
+            developers = developers.stream()
+                    .map(d -> d.getId().equals(developer.getId()) ? developer : d)
+                    .collect(Collectors.toList());
+            io.writeData(FILE_NAME, gson.toJson(developers));
+        }catch (Exception e){
+            System.out.println(e);;
+        }
+
+        return null;
     }
 
     @Override
@@ -43,34 +71,5 @@ public class JsonDeveloperRepositoryImpl implements DeveloperRepository {
         List<Developer> developers = gson.fromJson(io.readData(FILE_NAME), listType);
 
         return developers.stream().skip(1).collect(Collectors.toList());
-    }
-
-    @Override
-    public Developer save(Developer developer){
-        List<Developer> developers = gson.fromJson(io.readData(FILE_NAME), listType);
-
-
-        Long nextId = developers.get(0).getId();
-        developer.setId(nextId);
-        developers.get(0).setId(nextId + 1);
-        developers.add(developer);
-        io.writeData(FILE_NAME, gson.toJson(developers));
-        return null;
-    }
-
-    @Override
-    public Developer update(Developer developer){
-        List<Developer> developers = gson.fromJson(io.readData(FILE_NAME), listType);
-
-        try{
-            developers = developers.stream()
-                    .map(d -> d.getId().equals(developer.getId()) ? developer : d)
-                    .collect(Collectors.toList());
-                    io.writeData(FILE_NAME, gson.toJson(developers));
-        }catch (Exception e){
-            System.out.println(e);;
-        }
-
-        return null;
     }
 }
