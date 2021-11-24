@@ -5,7 +5,6 @@ import com.rush_xxx.controller.SkillControllerImpl;
 import com.rush_xxx.model.Developer;
 import com.rush_xxx.model.Skill;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -31,16 +30,17 @@ public class ViewDeveloperImpl extends BaseView{
         String firstName = sc.next();
         System.out.println("Input developer last name: ");
         String lastName = sc.next();
+        sc.nextLine();
 
         viewSkill.readAll();
-        System.out.print("Enter id of skill for add to developer :");
-        // необходимо сделать чтобы можно было выбирать несколько скиллов
-        // типа введите скиллы через запятую
-        Long id = sc.nextLong();
-        Skill skill = skillController.read(id);
+        System.out.print("Enter id skills separated by space for add to developer: ");
+        String skillsId = sc.nextLine();
 
-        List<Skill> skills = new ArrayList<>();
-        skills.add(skill);
+        List<Skill> skills = Arrays.stream(skillsId.split(" "))
+                .map(String::trim)
+                .map(Long::parseLong)
+                .map(skillController::read)
+                .collect(Collectors.toList());
 
         developerController.create(new Developer(1L, firstName, lastName, skills));
     }
@@ -71,12 +71,12 @@ public class ViewDeveloperImpl extends BaseView{
             System.out.println("Input developer new first name: ");
             String firstName = sc.next();
 
-            System.out.println("Input developer new last name: ");
+            System.out.println("Input developer new last name:");
             String lastName = sc.next();
+            sc.nextLine();
 
             viewSkill.readAll();
             System.out.print("Enter id of skill for add to developer: ");
-            // сканер nextLine не работает
             String skillsId = sc.nextLine();
 
             List<Skill> skillList = Arrays.stream(skillsId.split(" "))
@@ -93,6 +93,7 @@ public class ViewDeveloperImpl extends BaseView{
 
     @Override
     void delete() {
+        viewSkill.readAll();
         System.out.println("Input developer id to delete: ");
         Long id = sc.nextLong();
         try{
@@ -106,8 +107,10 @@ public class ViewDeveloperImpl extends BaseView{
     void readAll() {
         try{
             List<Developer> developers = developerController.readAll();
-            System.out.println("___________________________________");
-            System.out.println("        *** Developers list ***        ");
+            System.out.println(" ______________________________________ ");
+            System.out.println("|        *** Developers list ***       |");
+            System.out.println("| id | first name | last name | skills |");
+            System.out.println(" -------------------------------------- ");
             developers.forEach(d -> {
                 System.out.print(d.getId() + "  "
                         + d.getFirstName() + "  "
