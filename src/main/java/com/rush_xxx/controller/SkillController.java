@@ -4,7 +4,6 @@ import com.rush_xxx.model.Skill;
 import com.rush_xxx.repository.JsonSkillRepositoryImpl;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class SkillController {
 
@@ -31,9 +30,7 @@ public class SkillController {
     }
 
     public List<Skill> readAll(){
-        return jsonSkillRepository.getAll().stream()
-                .skip(1)
-                .collect(Collectors.toList());
+        return jsonSkillRepository.getAll();
     }
 
 }

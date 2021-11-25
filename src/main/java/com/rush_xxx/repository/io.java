@@ -7,11 +7,10 @@ import java.nio.file.Paths;
 
 public class io {
 
-    private static String pathToFile = "/src/main/resources/";
+    private static final String pathToFile = "/src/main/resources/";
     private static String data;
 
     protected static String readData(String filename){
-
         try (BufferedReader reader = new BufferedReader(
                 new InputStreamReader(
                         new FileInputStream(GetPath(filename)), StandardCharsets.UTF_8))) {
@@ -22,8 +21,8 @@ public class io {
 
         return data;
     }
-    protected static void writeData(String fileName, String data){
 
+    protected static void writeData(String fileName, String data){
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(GetPath(fileName)))) {
             writer.write(data);
         } catch (IOException e) {
@@ -31,11 +30,10 @@ public class io {
         }
     }
 
-    private static String GetPath(String filename)
-    {
+    private static String GetPath(String filename) {
         Path currentAbsolutePath = Paths.get("").toAbsolutePath();
-        String path = currentAbsolutePath + pathToFile + filename;
-        return path;
+
+        return currentAbsolutePath + pathToFile + filename;
     }
 
 }

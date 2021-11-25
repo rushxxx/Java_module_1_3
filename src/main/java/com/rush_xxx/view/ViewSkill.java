@@ -7,11 +7,11 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-public class ViewSkillImpl extends BaseView{
+public class ViewSkill extends BaseView{
 
     private final SkillController skillController;
 
-    ViewSkillImpl (SkillController skillController){
+    ViewSkill(SkillController skillController){
         this.skillController = skillController;
     }
 
@@ -38,6 +38,7 @@ public class ViewSkillImpl extends BaseView{
 
     @Override
     void update() {
+        readAll();
         System.out.print("input skill id to update: ");
         Long id = (long) sc.nextInt();
 
@@ -54,6 +55,7 @@ public class ViewSkillImpl extends BaseView{
 
     @Override
     void delete() {
+        readAll();
         System.out.println("Input skill id: ");
         Long id = (long) sc.nextInt();
         try{
@@ -66,14 +68,10 @@ public class ViewSkillImpl extends BaseView{
     @Override
     void readAll() {
         List<Skill> skills = skillController.readAll();
-
-        System.out.println("___________________________________");
-        System.out.println("        *** Skills list ***        ");
-
+        System.out.println("   *** Skills list *** ");
         for (Skill skill : skills) {
-            System.out.println("| " + skill.getId() + "  -  " + skill.getName());
+            System.out.println(skill.getId() + " - " + skill.getName());
         }
-        System.out.println("-----------------------------------");
     }
 
 }

@@ -10,14 +10,14 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-public class ViewTeamImpl extends BaseView{
+public class ViewTeam extends BaseView{
 
     private final TeamController teamController;
     private final DeveloperController developerController;
-    private final ViewDeveloperImpl viewDeveloper;
+    private final ViewDeveloper viewDeveloper;
 
 
-    public ViewTeamImpl (TeamController teamController, DeveloperController developerController, ViewDeveloperImpl viewDeveloper){
+    public ViewTeam(TeamController teamController, DeveloperController developerController, ViewDeveloper viewDeveloper){
         this.teamController = teamController;
         this.developerController = developerController;
         this.viewDeveloper = viewDeveloper;
@@ -52,7 +52,7 @@ public class ViewTeamImpl extends BaseView{
             Team team = teamController.read(id);
             System.out.println("Team name: " + team.getName());
             System.out.print("Developers: ");
-            team.getDevelopers().forEach(s -> System.out.println(
+            team.getDevelopers().forEach(s -> System.out.print(
                     s.getFirstName() + "  " + s.getLastName()));
             System.out.println();
         }catch(Exception e){
@@ -102,17 +102,13 @@ public class ViewTeamImpl extends BaseView{
     void readAll() {
         try{
             List<Team> teams = teamController.readAll();
-            System.out.println(" ________________________________ ");
-            System.out.println("|        *** Teams list ***      |");
-            System.out.println("| id |   name   |   developers   |");
-            System.out.println(" -------------------------------- ");
+            System.out.println("   *** Teams list *** ");
             teams.forEach(t -> {
                 System.out.print(t.getId() + "  " + t.getName() + "  ");
-                t.getDevelopers().forEach(s -> System.out.print(
-                        s.getFirstName() + "  " + s.getLastName()));
+//                t.getDevelopers().forEach(s -> System.out.print(
+//                        s.getFirstName() + "  " + s.getLastName()));
                 System.out.println("");
             });
-
         }catch (Exception e){
             System.out.println("Ops, there are not any developers" + e);
         }

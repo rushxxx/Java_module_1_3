@@ -66,7 +66,11 @@ public class JsonSkillRepositoryImpl implements SkillRepository{
 
     @Override
     public List<Skill> getAll() {
-        return gson.fromJson(io.readData(FILE_NAME), listType);
+        List<Skill> skills = gson.fromJson(io.readData(FILE_NAME), listType);
+
+        return skills.stream()
+                .skip(1)
+                .collect(Collectors.toList());
     }
 
 }

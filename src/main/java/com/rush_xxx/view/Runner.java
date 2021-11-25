@@ -21,15 +21,15 @@ public class Runner {
 
             JsonSkillRepositoryImpl skillRepository = new JsonSkillRepositoryImpl();
             SkillController skillController = new SkillController(skillRepository);
-            ViewSkillImpl viewSkillImpl = new ViewSkillImpl(skillController);
+            ViewSkill viewSkillImpl = new ViewSkill(skillController);
 
             JsonDeveloperRepositoryImpl developerRepository = new JsonDeveloperRepositoryImpl();
             DeveloperController developerController = new DeveloperController(developerRepository);
-            ViewDeveloperImpl viewDeveloper = new ViewDeveloperImpl(developerController, skillController, viewSkillImpl);
+            ViewDeveloper viewDeveloper = new ViewDeveloper(developerController, skillController, viewSkillImpl);
 
             JsonTeamRepositoryImpl teamRepository = new JsonTeamRepositoryImpl();
             TeamController teamController = new TeamController(teamRepository);
-            ViewTeamImpl viewTeam = new ViewTeamImpl(teamController, developerController, viewDeveloper);
+            ViewTeam viewTeam = new ViewTeam(teamController, developerController, viewDeveloper);
 
 
             if (response.equals("1")) viewTeam.showMenu("team");

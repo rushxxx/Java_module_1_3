@@ -10,13 +10,13 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-public class ViewDeveloperImpl extends BaseView{
+public class ViewDeveloper extends BaseView{
 
     private final DeveloperController developerController;
     private final SkillController skillController;
-    private final ViewSkillImpl viewSkill;
+    private final ViewSkill viewSkill;
 
-    public ViewDeveloperImpl(DeveloperController developerController, SkillController skillController, ViewSkillImpl viewSkill){
+    public ViewDeveloper(DeveloperController developerController, SkillController skillController, ViewSkill viewSkill){
         this.developerController = developerController;
         this.skillController = skillController;
         this.viewSkill = viewSkill;
@@ -54,7 +54,7 @@ public class ViewDeveloperImpl extends BaseView{
             System.out.println("Developer first name: " + developer.getFirstName());
             System.out.println("Developer last name: " + developer.getLastName());
             System.out.print("Skills: ");
-            developer.getSkills().forEach(s -> System.out.println(s.getName() + "  "));
+            developer.getSkills().forEach(s -> System.out.print(s.getName() + "  "));
             System.out.println();
         }catch(Exception e){
             System.out.println("Incorrect id");
@@ -107,10 +107,7 @@ public class ViewDeveloperImpl extends BaseView{
     void readAll() {
         try{
             List<Developer> developers = developerController.readAll();
-            System.out.println(" ______________________________________ ");
-            System.out.println("|        *** Developers list ***       |");
-            System.out.println("| id | first name | last name | skills |");
-            System.out.println(" -------------------------------------- ");
+            System.out.println("   *** Developers list *** ");
             developers.forEach(d -> {
                 System.out.print(d.getId() + "  "
                         + d.getFirstName() + "  "
