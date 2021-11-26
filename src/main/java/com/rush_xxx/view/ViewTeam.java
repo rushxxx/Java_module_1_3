@@ -4,6 +4,7 @@ import com.rush_xxx.controller.DeveloperController;
 import com.rush_xxx.controller.TeamController;
 import com.rush_xxx.model.Developer;
 import com.rush_xxx.model.Team;
+import com.rush_xxx.model.TeamStatus;
 
 import java.util.Arrays;
 import java.util.List;
@@ -41,11 +42,12 @@ public class ViewTeam extends BaseView{
                 .map(developerController::read)
                 .collect(Collectors.toList());
 
-        teamController.create(new Team(1L, name, developers));
+        teamController.create(new Team(1L, name, developers, TeamStatus.ACTIVE));
     }
 
     @Override
     void read() {
+        readAll();
         System.out.println("Input team id: ");
         Long id = sc.nextLong();
         try{
@@ -80,7 +82,7 @@ public class ViewTeam extends BaseView{
                     .map(developerController::read)
                     .collect(Collectors.toList());
 
-            teamController.update(new Team(id, newName, developerList));
+            teamController.update(new Team(id, newName, developerList, TeamStatus.ACTIVE));
         } else {
             System.out.println("There is no team with " + id + " id");
         }

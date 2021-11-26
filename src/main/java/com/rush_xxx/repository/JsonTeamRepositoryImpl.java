@@ -3,6 +3,7 @@ package com.rush_xxx.repository;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.rush_xxx.model.Team;
+import com.rush_xxx.model.TeamStatus;
 
 import java.lang.reflect.Type;
 import java.util.Collection;
@@ -58,11 +59,14 @@ public class JsonTeamRepositoryImpl implements TeamRepository {
         List<Team> teams = gson.fromJson(io.readData(FILE_NAME), listType);
 
         if (!id.equals(teams.get(0).getId())) {
-            List<Team> newTeam = teams.stream()
-                    .filter(t -> !t.getId().equals(id))
-                    .collect(Collectors.toList());
+            List<Team> newTeamsList = teams.stream()
+                    .map(t -> t.getId().equals(id)
+                            ? new Team(id, t.getName(), t.getDevelopers(), TeamStatus.DELETED)
+                            : t)
+                    .collect(Collectors.toList()
+                    );
 
-            io.writeData(FILE_NAME, gson.toJson(newTeam));
+            io.writeData(FILE_NAME, gson.toJson(newTeamsList));
         }
     }
 
@@ -70,7 +74,10 @@ public class JsonTeamRepositoryImpl implements TeamRepository {
     public List<Team> getAll() {
         List<Team> teams = gson.fromJson(io.readData(FILE_NAME), listType);
 
-        return teams.stream().skip(1).collect(Collectors.toList());
+        return teams.stream()
+                .skip(1)
+                .filter(team -> team.getTeamStatus() != TeamStatus.DELETED)
+                .collect(Collectors.toList());
     }
 
 }

@@ -7,11 +7,13 @@ public class Team {
     private Long id;
     private String name;
     private List<Developer> developers;
+    private TeamStatus teamStatus;
 
-    public Team(Long id, String name, List<Developer> developers) {
+    public Team(Long id, String name, List<Developer> developers, TeamStatus teamStatus) {
         this.id = id;
         this.name = name;
         this.developers = developers;
+        this.teamStatus = teamStatus;
     }
 
     @Override
@@ -49,5 +51,13 @@ public class Team {
 
     public void setDevelopers(List<Developer> developers) {
         this.developers = developers;
+    }
+
+    public TeamStatus getTeamStatus() {
+        return teamStatus;
+    }
+
+    public void setTeamStatus(TeamStatus teamStatus) {
+        this.teamStatus = teamStatus;
     }
 }
